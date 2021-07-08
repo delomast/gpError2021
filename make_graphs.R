@@ -196,6 +196,7 @@ dRelRes <- dRelRes %>% mutate(rel = gsub("_", ", ", rel))
 # for supplementary material
 diff_rel <- dRelRes %>% filter(method == "strat", rel %in% c("True, GAunt", "True, Unrel", 
 																 "GAunt, Unrel", "HGAunt, Unrel")) %>% 
+	mutate(rel = factor(rel, levels = c("True, GAunt", "True, Unrel", "GAunt, Unrel", "HGAunt, Unrel"))) %>%
 	ggplot(aes(x = falseNeg, y = falsePos, color = rel)) + geom_point() + geom_line() +
 	scale_y_continuous(trans="log10") + coord_cartesian(xlim = c(0, .05), ylim = c(1e-10, NA)) +
 	labs(x = "False negative", y = "False positive", color = "Relationship")
